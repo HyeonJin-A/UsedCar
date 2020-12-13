@@ -1,4 +1,3 @@
-package wekaTeamCSV;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,12 +13,12 @@ import java.util.Random;
 
 public class csvRandomExtract {
 	
-	static List<List<String>> allData = new ArrayList<List<String>>(); // csv¿øº»À» ÀúÀåÇÒ ¸®½ºÆ®
-	static List<List<String>> writeData = new ArrayList<List<String>>(); // Ãâ·ÂÇÒ ³»¿ëÀ» ´ãÀº ¸®½ºÆ®
+	static List<List<String>> allData = new ArrayList<List<String>>(); // csvì›ë³¸ì„ ì €ì¥í•  ë¦¬ìŠ¤íŠ¸
+	static List<List<String>> writeData = new ArrayList<List<String>>(); // ì¶œë ¥í•  ë‚´ìš©ì„ ë‹´ì€ ë¦¬ìŠ¤íŠ¸
 	
 	static void randomWrite(int startSize, int finishSize, int startRecord, int finishRecord) {
-		// random ¹è¿­ »ı¼º
-		// record : ÀÔ·ÂÆÄÀÏÀÇ ·¹ÄÚµå Çà ¹øÈ£
+		// random ë°°ì—´ ìƒì„±
+		// record : ì…ë ¥íŒŒì¼ì˜ ë ˆì½”ë“œ í–‰ ë²ˆí˜¸
 		int size = finishSize - startSize;
 		int arrayR[] = new int[size];
 		Random r = new Random();
@@ -32,7 +31,7 @@ public class csvRandomExtract {
 		}
 		Arrays.sort(arrayR);
 		
-		// writeData Ã¤¿ì±â
+		// writeData ì±„ìš°ê¸°
 		List<String> Line = new ArrayList<String>();
 		int j = 0;
 		for(int i = startRecord; i<finishRecord; i++) {
@@ -54,27 +53,27 @@ public class csvRandomExtract {
 		
 		BufferedReader br = null;
 		
-		//¿øÇÏ´Â ¸¸Å­ ¼öÁ¤
-		int inputSize = 3001;   //ÀÔ·ÂÆÄÀÏÀÇ ÀüÃ¼ Çà
+		//ì›í•˜ëŠ” ë§Œí¼ ìˆ˜ì •
+		int inputSize = 3001;   //ì…ë ¥íŒŒì¼ì˜ ì „ì²´ í–‰
 		int classIndex = 12;
 		int classNum = 5;
-		int OutputSize = 1280;   //Ãâ·ÂÇÒ ÀÎ½ºÅÏ½º ¼ö
+		int OutputSize = 1280;   //ì¶œë ¥í•  ì¸ìŠ¤í„´ìŠ¤ ìˆ˜
 		String className = "price_class";
-		int splitSize = OutputSize / classNum ;   //°¢ Å¬·¡½º¸¶´Ù Ãâ·ÂÇÒ ÀÎ½ºÅÏ½º ¼ö
+		int splitSize = OutputSize / classNum ;   //ê° í´ë˜ìŠ¤ë§ˆë‹¤ ì¶œë ¥í•  ì¸ìŠ¤í„´ìŠ¤ ìˆ˜
 		
 		
-		List<Integer> classSplit = new ArrayList<Integer>(); //Å¬·¡½º °ªÀÌ ´Ş¶óÁö´Â Çà
+		List<Integer> classSplit = new ArrayList<Integer>(); //í´ë˜ìŠ¤ ê°’ì´ ë‹¬ë¼ì§€ëŠ” í–‰
 		
 		// load CSV
 		try {
 			br = Files.newBufferedReader(
-					Paths.get("C:\\Users\\dkdle\\Desktop\\°øºÎÀÚ·á\\2020-2ÇĞ±â\\µ¥ÀÌÅÍ¸¶ÀÌ´×\\Áß°íÂ÷\\Áß°íÂ÷·£´ı3000ÃÖÁ¾.csv"));
+					Paths.get("C:\\Users\\dkdle\\Desktop\\ê³µë¶€ìë£Œ\\2020-2í•™ê¸°\\ë°ì´í„°ë§ˆì´ë‹\\ì¤‘ê³ ì°¨\\ì¤‘ê³ ì°¨ëœë¤3000ìµœì¢….csv"));
 			Charset.forName("UTF-8");
 			String line = "";
 			
 			int i =0;
 			
-			// CSVÆÄÀÏÀÇ ¸Å ÇàÀ» allData¿¡ ÀúÀå. Å¬·¡½º °ªÀÌ ´Ş¶óÁö¸é classSplit¿¡ Çà °ª ÀúÀå.
+			// CSVíŒŒì¼ì˜ ë§¤ í–‰ì„ allDataì— ì €ì¥. í´ë˜ìŠ¤ ê°’ì´ ë‹¬ë¼ì§€ë©´ classSplitì— í–‰ ê°’ ì €ì¥.
 			while ((line = br.readLine()) != null) {
 				i++;
 				List<String> tmpList = new ArrayList<String>();
@@ -87,7 +86,7 @@ public class csvRandomExtract {
 				//System.out.println(tmpList);
 				allData.add(tmpList);
 			}
-			classSplit.add(inputSize+1); // ¸¶Áö¸·Çà+1±îÁö ÀúÀå.
+			classSplit.add(inputSize+1); // ë§ˆì§€ë§‰í–‰+1ê¹Œì§€ ì €ì¥.
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -101,7 +100,7 @@ public class csvRandomExtract {
 			}
 		}
 		
-		// ½ÇÇà
+		// ì‹¤í–‰
 		for(int i = 0; i<classNum; i++) {
 			randomWrite(splitSize*i, splitSize*(i+1), classSplit.get(i), classSplit.get(i+1)-1);
 		}
@@ -111,7 +110,7 @@ public class csvRandomExtract {
 		BufferedWriter bufWriter = null;
 		try {
 			bufWriter = Files.newBufferedWriter(Paths
-					.get("C:\\Users\\dkdle\\Desktop\\°øºÎÀÚ·á\\2020-2ÇĞ±â\\µ¥ÀÌÅÍ¸¶ÀÌ´×\\Áß°íÂ÷\\Áß°íÂ÷·£´ı"+ OutputSize +"b.csv"),
+					.get("C:\\Users\\dkdle\\Desktop\\ê³µë¶€ìë£Œ\\2020-2í•™ê¸°\\ë°ì´í„°ë§ˆì´ë‹\\ì¤‘ê³ ì°¨\\ì¤‘ê³ ì°¨ëœë¤"+ OutputSize +"b.csv"),
 					Charset.forName("UTF-8"));
 			
 			//bufWriter.write("manufacturer,type,size,year,condition,fuel,odometer,transmission,drive,cylinders,paint_color,price,price_class,"); 
